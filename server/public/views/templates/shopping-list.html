@@ -119,7 +119,7 @@
 				</p>
 
 				<p role="cell">{{component.description}}</p>
-				<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
+				<p role="cell"><a href="{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
 				<p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
 					<span class="sort-button">
 						<i class="fas fa-info-circle"></i>
@@ -147,7 +147,7 @@
 								<p role="cell">{{component.general_stock_item}}</p>
 								<p role="cell">{{component.consumable}}</p>
 								<p role="cell">{{component.type}}</p>
-								<p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
+								<p role="cell"><a href="{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
 								<p role="cell">{{component.notes}}</p>
 							</div><!-- /.mock-table-row -->
 						</div><!-- /.mock-table-body -->
