@@ -20,8 +20,8 @@ if (process.env.DATABASE_URL) {
         host: params.hostname,
         port: params.port,
         database: params.pathname.split('/')[1],
-        ssl: true, // heroku requires ssl to be true
-        max: 10, // max number of clients in the pool
+        ssl: false, // heroku requires ssl to be true
+        max: 20, // max number of clients in the pool
         idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
     };
 
@@ -32,9 +32,11 @@ if (process.env.DATABASE_URL) {
         host: process.env.DATABASE_SERVER || 'localhost', // Server hosting the postgres database
         port: process.env.DATABASE_PORT || 5432, //env let: PGPORT
         database: process.env.DATABASE_NAME || 'sciencefromscientists', //env let: PGDATABASE
-        max: 10, // max number of clients in the pool
+        max: 20, // max number of clients in the pool
         idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
     };
 }
+
+console.log(pg.defaults.poolSize);
 
 module.exports = new pg.Pool(config);

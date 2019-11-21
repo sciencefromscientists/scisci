@@ -41,15 +41,25 @@ router.get('/users', authenticated, isAdmin, (req, res) => { //Start of get all 
     JOIN usertype ON users.usertype = usertype.id
     ORDER BY first_name;`;
 
-    pool.query(queryText)
-        .then((results) => {
-            res.send(results.rows);
-        })
-        .catch((error) => {
-            console.log('Error on GET user request', error);
-            res.sendStatus(500);
-        });
+    pool.connect(function (err, client, release) {
+        if (err) {
+            console.log('connection err ', err);
+            release();
+        }
 
+        let user = {};
+
+        client.query(queryText, function (err, result) {
+            release();
+            // Handle Errors
+            if (err) {
+                console.log('Error on GET user request', error);
+                res.sendStatus(500);
+            } else {
+                res.send(res.rows);
+            }
+        });
+    });
 }); //End of get all users function
 
 router.get('/shopping', authenticated, isAdmin, (req, res) => { //Start of get all users function

@@ -70,13 +70,27 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
 
 router.get('/modulesCount/:id', (req, res) => {
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
-  pool.query(queryText, [req.params.id])
-    .then((results) => {
-      res.send(results.rows);
-    })
-    .catch((error) => {
-      console.log(error);
+  pool.connect(function (err, client, release) {
+    if (err) {
+        release();
+        console.log('connection err ', err);
+        res.sendStatus(500);
+        return
+    }
+
+    let user = {};
+
+    client.query(queryText, function (err, result) {
+        release();
+        // Handle Errors
+        if (err) {
+            console.log('Error getting component modules counts', error);
+            res.sendStatus(500);
+        } else {
+          res.send(res.rows);
+        }
     });
+  });
 });
 
 
