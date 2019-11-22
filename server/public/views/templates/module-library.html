@@ -101,10 +101,10 @@
             <p role="cell">{{module.estimated_labor_cost | currency}}</p>
             <p role="cell">{{module.materials_in_kit_and_labor | currency}}</p>
             <p role="cell" ng-click="vm.deleteModule(module.id)">
-                <span class="button">Delete</span>
+                <button class="button">Delete</button>
             </p>
             <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
-                <span class="button">Info</span>
+                <button class="button">Info</button>
             </p>
             <div class="collapsed-table-data" ng-if="vm.showHideModuleData[$index].show">
                 <div class="mock-table" role="table" aria-label="Components">
