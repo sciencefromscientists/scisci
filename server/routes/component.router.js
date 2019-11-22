@@ -33,7 +33,7 @@ router.get('/', authenticated, isEditor, (req, res) => {
         //   console.log('error', err)
         // });
 
-        res.send(results);
+        res.send(results.rows);
 
       })
       .catch((error) => {
@@ -45,6 +45,25 @@ router.get('/', authenticated, isEditor, (req, res) => {
 router.get('/csv/component_library.csv', authenticated, isEditor, (req, res) => {
 
   let queryText = `SELECT * FROM components ORDER BY "name"`;
+  pool.connect(function (err, client, release) {
+    if (err) {
+        release();
+        console.log('connection err ', err);
+        res.sendStatus(500);
+        return
+    }
+
+    client.query(queryText, function (err, result) {
+        release();
+        // Handle Errors
+        if (err) {
+          console.log('Error on components sorted request', err);
+            res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+        }
+    });
+  });
   pool.query(queryText)
       .then((results) => {
         res.send(convertToCsv(results.rows));
@@ -58,25 +77,48 @@ router.get('/csv/component_library.csv', authenticated, isEditor, (req, res) => 
 router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
   let sortMethod = req.params.method;
   let queryText = sorting.sortComponents(sortMethod);
-  pool.query(queryText)
-    .then((results) => {
-      res.send(results.rows);
-    })
-    .catch((error) => {
-      console.log('Error on components sorted request', error);
-      res.sendStatus(500);
+  pool.connect(function (err, client, release) {
+    if (err) {
+        release();
+        console.log('connection err ', err);
+        res.sendStatus(500);
+        return
+    }
+
+    client.query(queryText, function (err, result) {
+        release();
+        // Handle Errors
+        if (err) {
+          console.log('Error on components sorted request', err);
+            res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+        }
+    });
   });
 });
 
 router.get('/modulesCount/:id', (req, res) => {
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
-  pool.query(queryText, [req.params.id])
-    .then((results) => {
-      res.send(results.rows);
-    })
-    .catch((error) => {
-      console.log(error);
+  pool.connect(function (err, client, release) {
+    if (err) {
+        release();
+        console.log('connection err ', err);
+        res.sendStatus(500);
+        return
+    }
+
+    client.query(queryText, [req.params.id], function (err, result) {
+        release();
+        // Handle Errors
+        if (err) {
+            console.log('Error getting component modules counts', err);
+            res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+        }
     });
+  });
 });
 
 

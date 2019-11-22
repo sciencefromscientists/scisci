@@ -43,9 +43,9 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
           .catch( function(error) {
             console.log(error);
           });
-    }
-    return componentData;
-  };
+      }
+      return componentData;
+    };
 
     
     /** Sorts a single component */
