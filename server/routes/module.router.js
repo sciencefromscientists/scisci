@@ -142,8 +142,12 @@ router.post('/', authenticated, isEditor, (req, res) => {
         other1_link,
         other2_title,
         other2_link,
+        other3_title,
+        other3_link,
+        other4_title,
+        other4_link,
         assembly_notes
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING id`;
     pool.query(queryText, [
         req.body.name,
         req.body.code,
@@ -160,6 +164,10 @@ router.post('/', authenticated, isEditor, (req, res) => {
         req.body.other1_link,
         req.body.other2_title,
         req.body.other2_link,
+        req.body.other3_title,
+        req.body.other3_link,
+        req.body.other4_title,
+        req.body.other4_link,
         req.body.assembly_notes
     ])
         .then(result => {
@@ -209,7 +217,11 @@ router.put('/', authenticated, isEditor, (req, res) => {
         other1_link = $14,
         other2_title = $15,
         other2_link = $16,
-        assembly_notes = $17
+        other3_title = $17,
+        other3_link = $18,
+        other4_title = $19,
+        other4_link = $20,
+        assembly_notes = $21
     WHERE id = $1`;
     pool.query(queryText, [
         req.body.id,
@@ -228,6 +240,10 @@ router.put('/', authenticated, isEditor, (req, res) => {
         req.body.other1_link,
         req.body.other2_title,
         req.body.other2_link,
+        req.body.other3_title,
+        req.body.other3_link,
+        req.body.other4_title,
+        req.body.other4_link,
         req.body.assembly_notes
     ])
         .then(result => {

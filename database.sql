@@ -61,7 +61,11 @@ CREATE TABLE modules (
 "other1_link" VARCHAR(255),
 "other1_title" VARCHAR(50),
 "other2_link" VARCHAR(255),
-"other2_title" VARCHAR(50)
+"other2_title" VARCHAR(50),
+"other3_link" VARCHAR(255),
+"other3_title" VARCHAR(50),
+"other4_link" VARCHAR(255),
+"other4_title" VARCHAR(50)
 );
 
 CREATE TABLE components_modules (
