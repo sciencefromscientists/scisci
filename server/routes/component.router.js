@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool.js');
 const sorting = require('../modules/sorting.js');
 const router = express.Router();
+const normalizeUrl = require('normalize-url');
 const authenticated = require('../models/authenticated');
 const isEditor = require('../models/editor');
 const convertToCsv = require('../modules/convertToCsv');
@@ -160,6 +161,16 @@ router.post('/', authenticated, isEditor, (req, res) => {
     "general_stock_item")
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
 
+  if (item.vendor_url_primary != null) {
+    item.vendor_url_primary = normalizeUrl(item.vendor_url_primary)
+  }
+
+  if (item.vendor_url_secondary != null) {
+    item.vendor_url_secondary = normalizeUrl(item.vendor_url_secondary)
+  }
+
+  console.log(item)
+
   pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
   item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
   item.consumable, item.type, item.general_stock_item])
@@ -194,6 +205,14 @@ router.put('/updateComponent', authenticated, isEditor, (req, res) => {
       "notes" = $7, "price_per_unit" = $8 , "pieces_per_unit" = $9, "consumable" = $10,
       "type" = $11 , "general_stock_item" = $12
       WHERE "id" = $13 `;
+
+    if (item.vendor_url_primary != null) {
+      item.vendor_url_primary = normalizeUrl(item.vendor_url_primary)
+    }
+  
+    if (item.vendor_url_secondary != null) {
+      item.vendor_url_secondary = normalizeUrl(item.vendor_url_secondary)
+    }
 
     pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
     item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
