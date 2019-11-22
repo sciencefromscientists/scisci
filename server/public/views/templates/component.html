@@ -165,12 +165,13 @@
               <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
             </p>
 
-            <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
+            <!-- <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p> -->
+            <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
             <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
             <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
                 <span class="sort-button">
-                    <i class="fas fa-info-circle"></i>
+                    <!-- <i class="fas fa-info-circle"></i> -->
                 </span>
             </p>
             <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
@@ -194,7 +195,7 @@
 
                             <p role="cell" ng-if="!vm.edit[component.id]">
                               <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
-                                <i class="fas fa-trash-alt"></i>
+                                <!--<i class="fas fa-trash-alt"></i>-->
                               </button>
                             </p>
                         </div>

@@ -21,7 +21,7 @@
                 <p role="cell">{{module.module_quantity}}</p>
                 <p role="cell" ng-click="vm.showChart(module)">
                         <span class="sort-button">
-                            <i class="fas fa-info-circle"></i>
+                            <!-- <i class="fas fa-info-circle"></i> -->
                         </span>
                     </p>
             </div><!-- /.mock-table-row -->
@@ -65,7 +65,8 @@
           <div ng-repeat= "component in vm.componentLibrary.list" class="mock-table-body" role="rowgroup">
               <div class="mock-table-row col col-3" row="row">
                   <p role="cell">{{component.name}}</p>
-                  <p role="cell"><span class="mockLink" ng-click="vm.getComponentModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
+                  <!-- <p role="cell"><span class="mockLink" ng-click="vm.getComponentModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p> -->
+                  <p role="cell"><span class="mockLink" ng-click="vm.getComponentModules(component)">{{component.modules_used_in}}</span></p>
                   <p role="cell">{{component.timesOrdered}}</p>
               </div><!-- /.mock-table-row -->
           </div><!-- /.mock-table-body -->
