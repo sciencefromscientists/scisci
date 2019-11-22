@@ -165,14 +165,11 @@
               <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
             </p>
 
-            <!-- <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p> -->
             <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
             <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
             <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
-                <span class="sort-button">
-                    <!-- <i class="fas fa-info-circle"></i> -->
-                </span>
+                <span class="button">Info</span>
             </p>
             <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
             <div class="collapsed-table-data" ng-if="vm.showHideModuleData[$index].show">
@@ -195,7 +192,7 @@
 
                             <p role="cell" ng-if="!vm.edit[component.id]">
                               <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
-                                <!--<i class="fas fa-trash-alt"></i>-->
+                                <span class="button">Delete</span>
                               </button>
                             </p>
                         </div>

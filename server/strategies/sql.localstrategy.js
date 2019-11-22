@@ -47,6 +47,11 @@ passport.use('local', new localStrategy({
     usernameField: 'username'
 }, function (req, username, password, done) {
     pool.connect(function (err, client, release) {
+        if (err) {
+            console.log('connection err ', err);
+            release();
+            done(err);
+        }
         // assumes the username will be unique, thus returning 1 or 0 results
         client.query("SELECT * FROM users WHERE username = $1", [username],
             function (err, result) {
