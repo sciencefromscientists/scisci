@@ -250,61 +250,61 @@ router.delete('/deleteComponent/:id', authenticated, isEditor, (req, res) => {
 /*            OTHER FUNCTIONS             */
 /******************************************/
 
-router.get('/migrate', authenticated, isEditor, (req, res) => {
-  let queryText = `SELECT * FROM components ORDER BY "name"`;
-  pool.query(queryText)
-      .then((results) => {
-        for (let row of results.rows) {
-          // $http.get(`/api/component/modulesCount/${component.id}`)
-          //     .then(function (response) {
-          //         component.modules_used_in = response.data[0].count;
-          //     })
-          //     .catch(function (error) {
-          //         console.log(error);
-          //     });
+// router.get('/migrate', authenticated, isEditor, (req, res) => {
+//   let queryText = `SELECT * FROM components ORDER BY "name"`;
+//   pool.query(queryText)
+//       .then((results) => {
+//         for (let row of results.rows) {
+//           // $http.get(`/api/component/modulesCount/${component.id}`)
+//           //     .then(function (response) {
+//           //         component.modules_used_in = response.data[0].count;
+//           //     })
+//           //     .catch(function (error) {
+//           //         console.log(error);
+//           //     });
         
-          let item = row;
+//           let item = row;
         
-          if(item.vendor_name_secondary == '') {
-            item.vendor_name_secondary = null;
-          }
-          if(item.vendor_url_secondary == '') {
-            item.vendor_url_secondary = null;
-          }
+//           if(item.vendor_name_secondary == '') {
+//             item.vendor_name_secondary = null;
+//           }
+//           if(item.vendor_url_secondary == '') {
+//             item.vendor_url_secondary = null;
+//           }
 
-          let queryText = `
-              UPDATE components SET "name" = $1, "description" = $2, "vendor_name_primary"= $3,
-              "vendor_url_primary" = $4, "vendor_name_secondary" = $5, "vendor_url_secondary" = $6,
-              "notes" = $7, "price_per_unit" = $8 , "pieces_per_unit" = $9, "consumable" = $10,
-              "type" = $11 , "general_stock_item" = $12
-              WHERE "id" = $13 `;
+//           let queryText = `
+//               UPDATE components SET "name" = $1, "description" = $2, "vendor_name_primary"= $3,
+//               "vendor_url_primary" = $4, "vendor_name_secondary" = $5, "vendor_url_secondary" = $6,
+//               "notes" = $7, "price_per_unit" = $8 , "pieces_per_unit" = $9, "consumable" = $10,
+//               "type" = $11 , "general_stock_item" = $12
+//               WHERE "id" = $13 `;
         
-            if (item.vendor_url_primary != null) {
-              item.vendor_url_primary = normalizeUrl(item.vendor_url_primary)
-            }
+//             if (item.vendor_url_primary != null) {
+//               item.vendor_url_primary = normalizeUrl(item.vendor_url_primary)
+//             }
           
-            if (item.vendor_url_secondary != null) {
-              item.vendor_url_secondary = normalizeUrl(item.vendor_url_secondary)
-            }
+//             if (item.vendor_url_secondary != null) {
+//               item.vendor_url_secondary = normalizeUrl(item.vendor_url_secondary)
+//             }
         
-            pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
-            item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
-            item.consumable, item.type, item.general_stock_item, item.id])
-              .then((results) => {
-                console.log("Migrated: ")
-                console.log(item.name)
-              })
-              .catch((error) => {
-                console.log('Error updating component', error);
-                res.sendStatus(500);
-              });
-        }
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        console.log('Error on GET components request', error);
-        res.sendStatus(500);
-    });
-});
+//             pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
+//             item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
+//             item.consumable, item.type, item.general_stock_item, item.id])
+//               .then((results) => {
+//                 console.log("Migrated: ")
+//                 console.log(item.name)
+//               })
+//               .catch((error) => {
+//                 console.log('Error updating component', error);
+//                 res.sendStatus(500);
+//               });
+//         }
+//         res.sendStatus(200);
+//       })
+//       .catch((error) => {
+//         console.log('Error on GET components request', error);
+//         res.sendStatus(500);
+//     });
+// });
 
 module.exports = router;
