@@ -195,13 +195,11 @@
             <p role="cell">{{row.pieces_per_unit}}</p>
             <p role="cell">
                 <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id); vm.newUnsavedChange()">
-                    <i class="fas fa-trash-alt"></i>
+                    <span class="button">Delete</span>
                 </a>
             </p>
             <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
-                <span class="sort-button">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                <span class="button">Info</span>
             </p>
 
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
