@@ -26,7 +26,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       self.getComponents()
         .then( function(componentData) {
-          self.componentLibrary.list = self.getModulesUsedIn(componentData.rows);
+          self.componentLibrary.list = self.getModulesUsedIn(componentData);
       });
 
     }; // getAllComponents()
