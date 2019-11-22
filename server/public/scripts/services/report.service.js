@@ -31,27 +31,25 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
         self.getComponents()
             .then(function (componentData) {
                 for (let component of componentData) {
-                    // $http.get(`/api/component/modulesCount/${component.id}`)
-                    //     .then(function (response) {
-                    //         component.modules_used_in = response.data[0].count;
-                    //     })
-                    //     .catch(function (error) {
-                    //         console.log(error);
-                    //     });
-                    component.modules_used_in = 1;
+                    $http.get(`/api/component/modulesCount/${component.id}`)
+                        .then(function (response) {
+                            component.modules_used_in = response.data[0].count;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 }
                 return componentData;
             })
             .then(function (componentData) {
                 for (let component of componentData) {
-                    // $http.get(`/api/report/componentOrdered/${component.id}`)
-                    //     .then(function (response) {
-                    //         component.timesOrdered = response.data[0].count;
-                    //     })
-                    //     .catch(function (error) {
-                    //         console.log(error);
-                    //     });
-                    component.timesOrdered = 1;
+                    $http.get(`/api/report/componentOrdered/${component.id}`)
+                        .then(function (response) {
+                            component.timesOrdered = response.data[0].count;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 }
                 self.componentLibrary.list = componentData;
             });

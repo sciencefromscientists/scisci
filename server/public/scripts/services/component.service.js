@@ -36,14 +36,13 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /** Gets all modules a component is used in */
     self.getModulesUsedIn = function(componentData) {
       for (let component of componentData) {
-        // $http.get(`/api/component/modulesCount/${component.id}`)
-        //   .then( function(response) {
-        //     component.modules_used_in = response.data[0].count;
-        //   })
-        //   .catch( function(error) {
-        //     console.log(error);
-        //   });
-        component.modules_used_in = 1;
+        $http.get(`/api/component/modulesCount/${component.id}`)
+          .then( function(response) {
+            component.modules_used_in = response.data[0].count;
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
       }
       return componentData;
     };

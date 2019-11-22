@@ -33,10 +33,10 @@ let getCosts = function (moduleId) {
             //console.log(data);
             
             let moduleArray = [];
-            let currentSum = 0;
-            let currentKitSum = 0;
-            let module_quantity = 0;
-            let laborCost = 0;
+           // let currentSum = 0;
+           // let currentKitSum = 0;
+           // let module_quantity = 0;
+           // let laborCost = 0;
             let currentModule;
 
             for (let i = 0; i < data.length; i++) {
