@@ -126,6 +126,43 @@ router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
 /*             POST REQUESTS              */
 /******************************************/
 router.post('/', authenticated, isEditor, (req, res) => {
+
+    if (req.body.module_drive_link != null && req.body.module_drive_link !== '') {
+        req.body.module_drive_link = normalizeUrl(req.body.module_drive_link, {forceHttps: true})
+    }
+    
+    if (req.body.to_be_printed_link != null && req.body.to_be_printed_link !== '') {
+        req.body.to_be_printed_link = normalizeUrl(req.body.to_be_printed_link, {forceHttps: true})
+    }
+
+    if (req.body.assembly_video_link != null && req.body.assembly_video_link !== '') {
+        req.body.assembly_video_link = normalizeUrl(req.body.assembly_video_link, {forceHttps: true})
+    }
+
+    if (req.body.activity_video_link != null && req.body.activity_video_link !== '') {
+        req.body.activity_video_link = normalizeUrl(req.body.activity_video_link, {forceHttps: true})
+    }
+
+    if (req.body.kit_content_link != null && req.body.kit_content_link !== '') {
+        req.body.kit_content_link = normalizeUrl(req.body.kit_content_link, {forceHttps: true})
+    }
+
+    if (req.body.other1_link != null && req.body.other1_link !== '') {
+        req.body.other1_link = normalizeUrl(req.body.other1_link, {forceHttps: true})
+    }
+
+    if (req.body.other2_link != null && req.body.other2_link !== '') {
+        req.body.other2_link = normalizeUrl(req.body.other2_link, {forceHttps: true})
+    }
+
+    if (req.body.other3_link != null && req.body.other3_link !== '') {
+        req.body.other3_link = normalizeUrl(req.body.other3_link, {forceHttps: true})
+    }
+
+    if (req.body.other4_link != null && req.body.other4_link !== '') {
+        req.body.other4_link = normalizeUrl(req.body.other4_link, {forceHttps: true})
+    }
+
     const queryText = `INSERT INTO modules (
         name,
         code,
@@ -201,6 +238,43 @@ router.post('/components', authenticated, isEditor, (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 router.put('/', authenticated, isEditor, (req, res) => {
+
+    if (req.body.module_drive_link != null && req.body.module_drive_link !== '') {
+        req.body.module_drive_link = normalizeUrl(req.body.module_drive_link, {forceHttps: true})
+    }
+    
+    if (req.body.to_be_printed_link != null && req.body.to_be_printed_link !== '') {
+        req.body.to_be_printed_link = normalizeUrl(req.body.to_be_printed_link, {forceHttps: true})
+    }
+
+    if (req.body.assembly_video_link != null && req.body.assembly_video_link !== '') {
+        req.body.assembly_video_link = normalizeUrl(req.body.assembly_video_link, {forceHttps: true})
+    }
+
+    if (req.body.activity_video_link != null && req.body.activity_video_link !== '') {
+        req.body.activity_video_link = normalizeUrl(req.body.activity_video_link, {forceHttps: true})
+    }
+
+    if (req.body.kit_content_link != null && req.body.kit_content_link !== '') {
+        req.body.kit_content_link = normalizeUrl(req.body.kit_content_link, {forceHttps: true})
+    }
+
+    if (req.body.other1_link != null && req.body.other1_link !== '') {
+        req.body.other1_link = normalizeUrl(req.body.other1_link, {forceHttps: true})
+    }
+
+    if (req.body.other2_link != null && req.body.other2_link !== '') {
+        req.body.other2_link = normalizeUrl(req.body.other2_link, {forceHttps: true})
+    }
+
+    if (req.body.other3_link != null && req.body.other3_link !== '') {
+        req.body.other3_link = normalizeUrl(req.body.other3_link, {forceHttps: true})
+    }
+
+    if (req.body.other4_link != null && req.body.other4_link !== '') {
+        req.body.other4_link = normalizeUrl(req.body.other4_link, {forceHttps: true})
+    }
+
     const queryText = `UPDATE modules SET
         name = $2,
         code = $3,
